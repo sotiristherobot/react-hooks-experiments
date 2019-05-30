@@ -1,8 +1,11 @@
 import React from 'react';
+import {Grommet} from "grommet";
 
 function App() {
   return (
-    <h1>Hello World</h1>
+      <Grommet>
+        <h1>Hello World</h1>
+      </Grommet>
   );
 }
 
