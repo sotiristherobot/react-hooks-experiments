@@ -1,11 +1,17 @@
-import React from 'react';
-import {Grommet} from "grommet";
+import React from "react";
+import { Grommet } from "grommet";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+// components
+import Home from "./components/home/Home";
 
 function App() {
   return (
-      <Grommet>
-        <h1>Hello World</h1>
-      </Grommet>
+    <Grommet>
+      <Router>
+        <Route exact path="/" component={Home} />
+      </Router>
+    </Grommet>
   );
 }
 
