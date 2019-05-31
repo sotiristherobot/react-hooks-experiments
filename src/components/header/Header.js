@@ -1,7 +1,10 @@
 import React from "react";
 import { Box, Heading } from "grommet";
+import Avatar from "../Avatar/Avatar";
 
 export default function Header(props) {
+  console.log(props);
+  const { photo, name, surname } = props.user;
   return (
     <Box
       direction="row"
@@ -20,9 +23,7 @@ export default function Header(props) {
         justify="around"
         alignSelf="stretch"
       >
-        <Heading level={3} margin="none">
-          Avatar
-        </Heading>
+        <Avatar url={photo} fullName={name} />
       </Box>
     </Box>
   );

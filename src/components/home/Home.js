@@ -6,15 +6,16 @@ import Header from "../header/Header";
 
 export default function Home() {
   const [user, setUser] = useState({});
+  const [url, setUrl] = useState("https://294d9b6e-de77-48ff-9163-ccfa95c32cfe.mock.pstmn.io/user");
   const [requestStatus, setRequestStatus] = useState({
     isLoading: true,
     errorMsg: null
   });
 
   useEffect(() => {
-    const fetchUser = () => {
+    const fetchData = (() => {
       axios.get(
-        "https://294d9b6e-de77-48ff-9163-ccfa95c32cfe.mock.pstmn.io/user"
+        url
       ).then(response => {
         const {status, data} = response;
 
@@ -25,15 +26,14 @@ export default function Home() {
       }).catch(error => {
         setRequestStatus({isLoading: true, errorMsg: error.message})
       });
-    };
-    fetchUser();
-  }, []);
+
+    });
+    fetchData();
+  }, [url]);
 
   return (
     <Box direction="column" alignSelf="stretch">
-      <Header />
-      {requestStatus.errorMsg}
-      {user.name}
+      {user.name? <Header user={user} />: ''}
     </Box>
   );
 }
