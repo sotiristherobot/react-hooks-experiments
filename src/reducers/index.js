@@ -1,3 +1,3 @@
 import { combineReducers } from "redux";
-const rootReducer = combineReducers();
-export default rootReducer;
+// const rootReducer = combineReducers();
+// export default rootReducer;
