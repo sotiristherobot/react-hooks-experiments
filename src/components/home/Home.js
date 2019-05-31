@@ -1,18 +1,39 @@
-import React from "react";
-import { Box, Heading } from "grommet";
+import React, { useState, useEffect } from "react";
+import { Box } from "grommet";
+import axios from "axios";
+
 import Header from "../header/Header";
 
 export default function Home() {
+  const [user, setUser] = useState({});
+  const [requestStatus, setRequestStatus] = useState({
+    isLoading: true,
+    errorMsg: null
+  });
+
+  useEffect(() => {
+    const fetchUser = () => {
+      axios.get(
+        "https://294d9b6e-de77-48ff-9163-ccfa95c32cfe.mock.pstmn.io/user"
+      ).then(response => {
+        const {status, data} = response;
+
+        if (status === 200) {
+          setUser(data);
+          setRequestStatus({...requestStatus, isLoading: false});
+        }
+      }).catch(error => {
+        setRequestStatus({isLoading: true, errorMsg: error.message})
+      });
+    };
+    fetchUser();
+  }, []);
+
   return (
     <Box direction="column" alignSelf="stretch">
-      <Header>
-        <Heading level={3} margin="none">
-          Sotiris
-        </Heading>
-        <Heading level={3} margin="none">
-          Content
-        </Heading>
-      </Header>
+      <Header />
+      {requestStatus.errorMsg}
+      {user.name}
     </Box>
   );
 }
