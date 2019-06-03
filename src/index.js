@@ -4,9 +4,10 @@ import App from "./App";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
+import {Grommet} from "grommet/es6";
 
 // const store = createStore();
 {
   /*<Provider store={store}>*/
 }
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Grommet><App /></Grommet>, document.getElementById("root"));
