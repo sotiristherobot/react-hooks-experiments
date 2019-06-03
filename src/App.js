@@ -7,11 +7,9 @@ import Home from "./components/home/Home";
 
 function App() {
   return (
-    <Grommet>
-      <Router>
-        <Route exact path="/" component={Home} />
-      </Router>
-    </Grommet>
+    <Router>
+      <Route exact path="/" component={Home} />
+    </Router>
   );
 }
 

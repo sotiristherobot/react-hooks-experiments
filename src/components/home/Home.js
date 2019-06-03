@@ -5,35 +5,29 @@ import axios from "axios";
 import Header from "../header/Header";
 
 export default function Home() {
-  const [user, setUser] = useState({});
-  const [requestStatus, setRequestStatus] = useState({
-    isLoading: true,
-    errorMsg: null
-  });
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    const fetchUser = () => {
+    const fetchData = (() => {
       axios.get(
-        "https://294d9b6e-de77-48ff-9163-ccfa95c32cfe.mock.pstmn.io/user"
+          "https://294d9b6e-de77-48ff-9163-ccfa95c32cfe.mock.pstmn.io/user"
       ).then(response => {
         const {status, data} = response;
 
         if (status === 200) {
-          setUser(data);
-          setRequestStatus({...requestStatus, isLoading: false});
+          setData({ user: data, isLoading: false, errorMsg: null});
         }
       }).catch(error => {
-        setRequestStatus({isLoading: true, errorMsg: error.message})
+        setData({isLoading: true, errorMsg: error.message})
       });
-    };
-    fetchUser();
+
+    });
+    fetchData();
   }, []);
 
   return (
     <Box direction="column" alignSelf="stretch">
-      <Header />
-      {requestStatus.errorMsg}
-      {user.name}
+      {data && data.user? <Header user={data.user} />: ''}
     </Box>
   );
 }
