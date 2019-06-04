@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Heading } from "grommet";
-import Avatar from "../Avatar/Avatar";
+import Avatar from "../avatar/Avatar";
 
 export default function Header(props) {
   console.log(props);
