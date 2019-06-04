@@ -1,5 +1,4 @@
 import React from "react";
-import { Grommet } from "grommet";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // components
