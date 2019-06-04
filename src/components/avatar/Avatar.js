@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Image } from "grommet";
+import { Image, Menu } from "grommet";
 
 const RoundedImage = styled(Image)`
   width: 50px;
@@ -9,6 +9,10 @@ const RoundedImage = styled(Image)`
 `;
 
 export default function Avatar(props) {
-    console.log(props.fullName);
-  return <RoundedImage  src={props.url} alt={props.fullName} />;
+  return (
+    <Menu
+      label={<RoundedImage src={props.url} alt={props.fullName} />}
+      items={[{ label: `Logged in as: ${props.fullName}`},{ label: "Logout", onClick: () => {}}]}
+    />
+  );
 }
