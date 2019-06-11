@@ -3,11 +3,16 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import reducer from "./reducers";
-import {Grommet} from "grommet/es6";
+import rootReducer from "./reducers/index";
+import { Grommet } from "grommet/es6";
 
-// const store = createStore();
-{
-  /*<Provider store={store}>*/
-}
-ReactDOM.render(<Grommet><App /></Grommet>, document.getElementById("root"));
+const store = createStore(rootReducer);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Grommet>
+      <App />
+    </Grommet>
+  </Provider>,
+  document.getElementById("root")
+);

@@ -12,7 +12,11 @@ export default function Avatar(props) {
   return (
     <Menu
       label={<RoundedImage src={props.url} alt={props.fullName} />}
-      items={[{ label: `Logged in as: ${props.fullName}`},{ label: "Logout", onClick: () => {}}]}
+      items={[
+        { label: `Logged in as: ${props.fullName}` },
+        { label: "Edit profile", onClick: () => {} },
+        { label: "Logout", onClick: () => {} }
+      ]}
     />
   );
 }

@@ -1,3 +1,5 @@
 import { combineReducers } from "redux";
-// const rootReducer = combineReducers();
-// export default rootReducer;
+import listitems from './listItems.reducer';
+
+const rootReducer = combineReducers({listitems});
+export default rootReducer;
