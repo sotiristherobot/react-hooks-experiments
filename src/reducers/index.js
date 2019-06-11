@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import listitems from './listItems.reducer';
+import user from './user.reducer';
 
-const rootReducer = combineReducers({listitems});
+const rootReducer = combineReducers({user});
 export default rootReducer;
