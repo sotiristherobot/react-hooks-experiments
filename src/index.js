@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import rootReducer from "./reducers/index";
 import { Grommet } from "grommet/es6";
 import createSagaMiddleware from "redux-saga";
-import { watchUser } from "./sagas/index.saga";
+import { watchUser } from "./sagas/user.saga";
 
 const sagaMiddleWare = createSagaMiddleware();
 

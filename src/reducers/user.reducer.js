@@ -1,7 +1,7 @@
 import {
-  API_CALL_REQUEST,
-  API_CALL_SUCCESS,
-  API_CALL_FAILURE
+  API_REQUEST_USER,
+  API_REQUEST_USER_SUCCESS,
+  API_REQUEST_USER_FAILURE
 } from "../constants/actionTypes";
 
 export default function userReducer(
@@ -9,17 +9,22 @@ export default function userReducer(
   action
 ) {
   switch (action.type) {
-    case API_CALL_REQUEST:
+    case API_REQUEST_USER:
       return { ...state, loadingUser: true, user: null, error: null };
-    case API_CALL_SUCCESS:
+    case API_REQUEST_USER_SUCCESS:
       return {
         ...state,
         loadingUser: false,
         user: action.payload.user,
         error: null
       };
-    case API_CALL_FAILURE:
-      return { ...state, loadingUser: false, user: null, error: action.payload.error };
+    case API_REQUEST_USER_FAILURE:
+      return {
+        ...state,
+        loadingUser: false,
+        user: null,
+        error: action.payload.error
+      };
     default:
       return state;
   }
