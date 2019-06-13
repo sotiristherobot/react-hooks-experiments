@@ -19,8 +19,8 @@ export default function Home() {
     <Box direction="column" alignSelf="stretch">
       <Suspense fallback={<div>Loading......</div>}>
         {!user.loadingUser && user.user ? <Header user={user.user} /> : null}
+        {noValue}
       </Suspense>
-      {noValue}
     </Box>
   );
 }

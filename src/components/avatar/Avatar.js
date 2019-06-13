@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Image, Menu } from "grommet";
+import useReactRouter from "use-react-router";
 
 const RoundedImage = styled(Image)`
   width: 50px;
@@ -9,12 +10,17 @@ const RoundedImage = styled(Image)`
 `;
 
 export default function Avatar(props) {
+  const { history } = useReactRouter();
+
   return (
     <Menu
       label={<RoundedImage src={props.url} alt={props.fullName} />}
       items={[
         { label: `Logged in as: ${props.fullName}` },
-        { label: "Edit profile", onClick: () => {} },
+        {
+          label: "Edit profile",
+          onClick: () => history.push("/profile")
+        },
         { label: "Logout", onClick: () => {} }
       ]}
     />
