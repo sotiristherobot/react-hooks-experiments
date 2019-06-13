@@ -1,21 +1,31 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // components
 import Home from "./components/home/Home";
+import { useDispatch, useSelector } from "react-redux";
+import { API_REQUEST_USER } from "./constants/actionTypes";
+import Header from "./components/header/Header";
 
 // lazy load routes
-const Profile = React.lazy(() => import("./components/profile/Profile"));
+const Profile = lazy(() => import("./components/profile/Profile"));
 
 function App() {
+  const user = useSelector(state => state.user),
+    dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: API_REQUEST_USER });
+  }, []);
+
   return (
-    <Suspense fallback={<div>Loading</div>}>
-      <Router>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/profile" component={Profile} />
-      </Router>
-    </Suspense>
+    <Router>
+      {!user.loadingUser && user.user ? <Header user={user.user} /> : null}
+      <Route exact path="/" component={Home} />
+      <Suspense fallback={<div>Loading.....</div>}>
+        <Route path="/profile" component={Profile} />
+      </Suspense>
+    </Router>
   );
 }
-
 export default App;

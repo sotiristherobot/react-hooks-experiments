@@ -8,7 +8,7 @@ const HeaderStyle = {
 
 export default function Header(props) {
   console.log(props);
-  const { photo, name, surname } = props.user;
+  const { photo, name } = props.user;
   return (
     <Box
       direction="row"
