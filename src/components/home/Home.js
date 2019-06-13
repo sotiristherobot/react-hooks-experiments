@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { Box } from "grommet";
 import { useSelector, useDispatch } from "react-redux";
 import { API_REQUEST_USER } from "../../constants/actionTypes";
-import Header from "../header/Header";
-import {useNoValue} from "../../utils/useNoValue";
+import { useNoValue } from "../../utils/useNoValue";
+
+const Header = React.lazy(() => import("../header/Header"));
 
 export default function Home() {
   const user = useSelector(state => state.user),
@@ -16,7 +17,9 @@ export default function Home() {
 
   return (
     <Box direction="column" alignSelf="stretch">
-      {!user.loadingUser && user.user ? <Header user={user.user} /> : null}
+      <Suspense fallback={<div>Loading......</div>}>
+        {!user.loadingUser && user.user ? <Header user={user.user} /> : null}
+      </Suspense>
       {noValue}
     </Box>
   );
