@@ -6,12 +6,12 @@ import { Provider } from "react-redux";
 import rootReducer from "./reducers/index";
 import { Grommet } from "grommet/es6";
 import createSagaMiddleware from "redux-saga";
-import { watchUser } from "./sagas/user.saga";
+import { watchAll } from "./sagas/root.saga";
 
 const sagaMiddleWare = createSagaMiddleware();
 
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleWare));
-sagaMiddleWare.run(watchUser);
+sagaMiddleWare.run(watchAll);
 
 ReactDOM.render(
   <Provider store={store}>
