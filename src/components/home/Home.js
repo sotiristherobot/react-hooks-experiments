@@ -3,8 +3,14 @@ import { Box } from "grommet";
 
 export default function Home() {
   return (
-    <Box direction="column" alignSelf="stretch">
-        <p>Main Component to move here</p>
+    <Box
+      direction="row"
+      align="center"
+      justify="around"
+      alignSelf="stretch"
+      margin="medium"
+    >
+      <p>Main Component to move here</p>
     </Box>
   );
 }

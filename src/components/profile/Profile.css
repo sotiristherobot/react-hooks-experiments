@@ -1,7 +1,7 @@
 .profileForm {
     display: flex;
     flex-direction: column;
-    flex-basis: 500px;
+    flex-basis: 60%;
 }
 .profileForm button {
     width: 150px;

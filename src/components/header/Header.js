@@ -10,26 +10,19 @@ export default function Header(props) {
   console.log(props);
   const { photo, name } = props.user;
   return (
-    <Box
-      direction="row"
-      align="center"
-      alignContent="between"
-      justify="around"
-      alignSelf="stretch"
-      background={HeaderStyle.backgroundColor}
-    >
-      <Heading level={3} margin="none">
-        Sotiris
-      </Heading>
       <Box
-        direction="row"
         align="center"
-        alignContent="between"
-        justify="around"
-        alignSelf="stretch"
+        background={HeaderStyle.backgroundColor}
       >
+        <Box
+          width="60%"
+          direction="row"
+          justify="between"
+          align="center"
+        >
+        <Heading level={3} margin="none">Sotiris</Heading>
         <Avatar url={photo} fullName={name} />
+        </Box>
       </Box>
-    </Box>
   );
 }

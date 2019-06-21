@@ -9,7 +9,6 @@ export default function Profile() {
         align="center"
         justify="around"
         alignSelf="stretch"
-        margin="medium"
     >
       <Form className="profileForm">
         <FormField name="name" label="Name" required />
