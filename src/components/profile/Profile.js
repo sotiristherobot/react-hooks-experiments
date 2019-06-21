@@ -9,13 +9,14 @@ export default function Profile() {
         align="center"
         justify="around"
         alignSelf="stretch"
+        margin="medium"
     >
       <Form className="profileForm">
         <FormField name="name" label="Name" required />
         <FormField name="username" label="Username" required />
         <FormField name="email" label="Email" />
         <FormField name="phone" label="Phone" />
-        <Button type="submit" primary label="Submit" fill={false} />
+        <Button type="submit" primary label="Submit" fill={false} className="formSubmitBtn"/>
       </Form>
     </Box>
   );

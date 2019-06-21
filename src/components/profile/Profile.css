@@ -1,5 +1,8 @@
 .profileForm {
     display: flex;
     flex-direction: column;
-    flex-grow: 0.4;
+    flex-basis: 500px;
+}
+.profileForm button {
+    width: 150px;
 }
