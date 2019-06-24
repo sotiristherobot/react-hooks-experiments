@@ -13,18 +13,19 @@ export default function Home() {
   }, []);
 
   return (
-    <Box
-      direction="row"
-      align="center"
-      justify="around"
-      alignSelf="stretch"
-      margin="medium"
-    >
-      {
-        !articles.loadingArticles && articles.map(article =>
-            <Article key={article.id} title={article.title} content={article.content} image={article.image} />
-        )
-      }
-    </Box>
+      <Box>
+        <Box
+            width="60%"
+            direction="column"
+            alignSelf="center"
+        >
+          {
+            !articles.loadingArticles && articles.map(article =>
+                <Article key={article.id} title={article.title} content={article.content} image={article.image} />
+            )
+          }
+        </Box>
+      </Box>
+
   );
 }
