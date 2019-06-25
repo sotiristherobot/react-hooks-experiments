@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "grommet";
-import { Like } from "grommet-icons";
+import { Like, Dislike } from "grommet-icons";
 
 import styled from "styled-components";
 
@@ -25,7 +25,13 @@ export default function Article(props) {
       <h1>{props.title}</h1>
       <p>{props.content}</p>
       <StatusBar>
-        <Like />
+        <Box
+            direction="row"
+            gap="small"
+        >
+          <Like />
+          <Dislike/>
+        </Box>
       </StatusBar>
     </Box>
   );
