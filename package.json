@@ -13,7 +13,7 @@
     "react-scripts": "3.0.1",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.3",
-    "styled-components": "^4.3.1",
+    "styled-components": "^5.0.0-beta.5",
     "use-react-router": "^1.0.7"
   },
   "scripts": {
