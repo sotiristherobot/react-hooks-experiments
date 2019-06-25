@@ -14,9 +14,15 @@ export default function Home() {
 
   return (
     <Box>
-      <Box width="60%" direction="column" alignSelf="center">
+      <Box
+        width="60%"
+        direction="row"
+        alignSelf="center"
+        justify="center"
+        wrap={true}
+      >
         {!articles.loadingArticles && (
-          <InfiniteScroll items={articles}>
+          <InfiniteScroll items={articles} overflow="auto">
             {article => (
               <Article
                 key={article.id}
