@@ -7,6 +7,7 @@ import styled from "styled-components";
 export default function Article(props) {
   const StatusBar = styled.div`
     color: red;
+    width: 100%;
     margin-top: auto;
     align-self: flex-start;
   `;
@@ -18,16 +19,23 @@ export default function Article(props) {
       border="all"
       elevation="large"
       margin={{ top: "small", right: "small", bottom: "small", left: "none" }}
-      pad="small"
       width="medium"
       overflow="hidden"
     >
+      <Box
+        direction="column"
+        pad="small"
+      >
       <h1>{props.title}</h1>
       <p>{props.content}</p>
+      </Box>
       <StatusBar>
         <Box
             direction="row"
-            gap="small"
+            pad="small"
+            gap="medium"
+            justify="stretch"
+            background="red"
         >
           <Like />
           <Dislike/>
