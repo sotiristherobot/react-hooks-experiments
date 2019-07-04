@@ -5,7 +5,7 @@ import { Edit } from "grommet-icons";
 export default function Profile() {
   return (
     <Box align="center">
-      <Box width="60%" pad="medium">
+      <Box width="60%" pad={{top: 'medium'}}>
         <Box direction="row" justify="end">
           <Button icon={<Edit/>} fill="vertical" label="Edit" onClick={() => {}} />
         </Box>
@@ -19,7 +19,6 @@ export default function Profile() {
             primary
             label="Submit"
             fill={false}
-            className="formSubmitBtn"
           />
         </Form>
       </Box>
