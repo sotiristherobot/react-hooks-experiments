@@ -24,6 +24,7 @@ export default function Article(props) {
       overflow="hidden"
     >
       <Box direction="column" pad="small">
+        <h1>{props.articleIndex}</h1>
         <h1>{props.title}</h1>
         <p>{props.content}</p>
       </Box>

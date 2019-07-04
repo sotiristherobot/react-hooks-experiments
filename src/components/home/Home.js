@@ -22,13 +22,14 @@ export default function Home() {
         wrap={true}
       >
         {!articles.loadingArticles && (
-          <InfiniteScroll items={articles} overflow="auto">
-            {article => (
+          <InfiniteScroll step={50} items={articles}>
+            {(article, index) => (
               <Article
                 key={article.id}
                 title={article.title}
                 content={article.content}
                 image={article.image}
+                articleIndex={index}
               />
             )}
           </InfiniteScroll>
