@@ -4,7 +4,7 @@ import Avatar from "../avatar/Avatar";
 import useReactRouter from "use-react-router";
 
 const HeaderStyle = {
-  backgroundColor: '#f44336'
+  backgroundColor: '#243959'
 };
 
 export default function Header(props) {
