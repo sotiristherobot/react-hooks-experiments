@@ -11,9 +11,7 @@ export default function Header(props) {
   console.log(props);
   const { photo, name } = props.user,
     { history } = useReactRouter(),
-    onHeaderClick = function () {
-      history.push('/');
-    };
+    onHeaderClick = () => history.push('/');
 
   return (
       <Box
