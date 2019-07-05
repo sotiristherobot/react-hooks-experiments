@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import { Box } from "grommet";
 import { Like, Dislike } from "grommet-icons";
 
 import styled from "styled-components";
 
-export default function Article(props) {
+function Article(props) {
   const StatusBar = styled.div`
     width: 100%;
     margin-top: auto;
@@ -12,6 +13,14 @@ export default function Article(props) {
   `;
   const [isLiked, setLiked] = useState(false);
   const onLikeClick = () => (isLiked ? setLiked(false) : setLiked(true));
+
+  /**
+   * Navigates to the article detail page on article click.
+  */
+  const onArticleClick = () => {
+    //TODO We need to dispatch an action to redux to get the selected article
+    props.history.push(`/article/${props.articleIndex}`);
+  };
 
   return (
     <Box
@@ -22,6 +31,7 @@ export default function Article(props) {
       margin={{ top: "small", right: "small", bottom: "small", left: "none" }}
       width="medium"
       overflow="hidden"
+      onClick={onArticleClick}
     >
       <Box direction="column" pad="small">
         <h1>{props.articleIndex}</h1>
@@ -37,3 +47,4 @@ export default function Article(props) {
     </Box>
   );
 }
+export default withRouter(Article);
