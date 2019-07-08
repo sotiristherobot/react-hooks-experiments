@@ -31,9 +31,8 @@ function Article(props) {
       margin={{ top: "small", right: "small", bottom: "small", left: "none" }}
       width="medium"
       overflow="hidden"
-      onClick={onArticleClick}
     >
-      <Box direction="column" pad="small">
+      <Box direction="column" pad="small" onClick={onArticleClick}>
         <h1>{props.articleIndex}</h1>
         <h1>{props.title}</h1>
         <p>{props.content}</p>
