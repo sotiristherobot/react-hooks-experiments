@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import { Box } from "grommet";
-import { Like, Dislike } from "grommet-icons";
+import { Box, Heading } from "grommet";
+import { Like } from "grommet-icons";
 
 import styled from "styled-components";
 
@@ -32,15 +32,24 @@ function Article(props) {
       width="medium"
       overflow="hidden"
     >
+      <Box
+        alignSelf="stretch"
+        justify="center"
+        background="#243959"
+        align="center"
+        gap="small"
+        height="30px"
+        direction="row"
+      >
+          <Heading level={4} margin="0">{props.articleIndex}</Heading>
+          <Heading level={4} margin="0">{props.title}</Heading>
+      </Box>
       <Box direction="column" pad="small" onClick={onArticleClick}>
-        <h1>{props.articleIndex}</h1>
-        <h1>{props.title}</h1>
         <p>{props.content}</p>
       </Box>
       <StatusBar>
         <Box direction="row" pad="small" gap="medium" justify="stretch">
-          <Like color={isLiked ? "blue" : null} onClick={onLikeClick} />
-          <Dislike />
+          <Like size="medium" color={isLiked ? "blue" : null} onClick={onLikeClick} />
         </Box>
       </StatusBar>
     </Box>
