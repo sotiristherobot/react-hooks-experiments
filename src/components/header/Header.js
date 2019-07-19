@@ -14,7 +14,7 @@ export default function Header(props) {
     onHeaderClick = () => history.push("/");
 
   return (
-    <Box align="center" background={HeaderStyle.backgroundColor}>
+    <Box align="center" background={HeaderStyle.backgroundColor} flex={{ grow:false}}>
       <Box width="80%" direction="row" justify="between" align="center">
         <Heading level={3} margin="none" onClick={onHeaderClick}>
           Sotiris
