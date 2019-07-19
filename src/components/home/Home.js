@@ -13,28 +13,20 @@ export default function Home() {
   }, []);
 
   return (
-    <Box>
-      <Box
-        width="60%"
-        direction="row"
-        alignSelf="center"
-        justify="center"
-        wrap={true}
-      >
-        {!articles.loadingArticles && (
-          <InfiniteScroll step={50} items={articles}>
-            {(article, index) => (
-              <Article
-                key={article.id}
-                title={article.title}
-                content={article.content}
-                image={article.image}
-                articleIndex={index}
-              />
-            )}
-          </InfiniteScroll>
-        )}
-      </Box>
+    <Box direction="row" wrap={true} fill={false} justify="center">
+      {!articles.loadingArticles && (
+        <InfiniteScroll step={50} items={articles}>
+          {(article, index) => (
+            <Article
+              key={article.id}
+              title={article.title}
+              content={article.content}
+              image={article.image}
+              articleIndex={index}
+            />
+          )}
+        </InfiniteScroll>
+      )}
     </Box>
   );
 }

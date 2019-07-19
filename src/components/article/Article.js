@@ -16,7 +16,7 @@ function Article(props) {
 
   /**
    * Navigates to the article detail page on article click.
-  */
+   */
   const onArticleClick = () => {
     //TODO We need to dispatch an action to redux to get the selected article
     props.history.push(`/article/${props.articleIndex}`);
@@ -28,7 +28,7 @@ function Article(props) {
       animation="fadeIn"
       border="all"
       elevation="large"
-      margin={{ top: "small", right: "small", bottom: "small", left: "none" }}
+      margin="small"
       width="medium"
       overflow="hidden"
     >
@@ -41,15 +41,23 @@ function Article(props) {
         height="30px"
         direction="row"
       >
-          <Heading level={4} margin="0">{props.articleIndex}</Heading>
-          <Heading level={4} margin="0">{props.title}</Heading>
+        <Heading level={4} margin="0">
+          {props.articleIndex}
+        </Heading>
+        <Heading level={4} margin="0">
+          {props.title}
+        </Heading>
       </Box>
       <Box direction="column" pad="small" onClick={onArticleClick}>
         <p>{props.content}</p>
       </Box>
       <StatusBar>
         <Box direction="row" pad="small" gap="medium" justify="stretch">
-          <Like size="medium" color={isLiked ? "blue" : null} onClick={onLikeClick} />
+          <Like
+            size="medium"
+            color={isLiked ? "blue" : null}
+            onClick={onLikeClick}
+          />
         </Box>
       </StatusBar>
     </Box>

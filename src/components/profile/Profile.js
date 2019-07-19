@@ -9,46 +9,44 @@ export default function Profile() {
     };
 
   return (
-    <Box align="center">
-      <Box width="60%" pad={{ top: "medium" }}>
-        <Box direction="row" justify="end" gap="small">
-          {isEditMode ? (
-            <Button
-              icon={<Save />}
-              fill="vertical"
-              label="Save"
-              onClick={() => {
-                alert("saved");
-                setIsEditMode(false);
-              }}
-            />
-          ) : null}
+    <Box width="80%" pad={{ top: "medium" }} alignSelf="center">
+      <Box direction="row" justify="end" gap="small">
+        {isEditMode ? (
           <Button
-            icon={<Edit />}
+            icon={<Save />}
             fill="vertical"
-            label="Edit"
-            onClick={editButtonClicked}
+            label="Save"
+            onClick={() => {
+              alert("saved");
+              setIsEditMode(false);
+            }}
           />
-        </Box>
-        <Form>
-          <FormField name="name" label="Name" required disabled={!isEditMode} />
-          <FormField
-            name="username"
-            label="Username"
-            required
-            disabled={!isEditMode}
-          />
-          <FormField name="email" label="Email" disabled={!isEditMode} />
-          <FormField name="phone" label="Phone" disabled={!isEditMode} />
-          <Button
-            type="submit"
-            primary
-            label="Submit"
-            fill={false}
-            disabled={!isEditMode}
-          />
-        </Form>
+        ) : null}
+        <Button
+          icon={<Edit />}
+          fill="vertical"
+          label="Edit"
+          onClick={editButtonClicked}
+        />
       </Box>
+      <Form>
+        <FormField name="name" label="Name" required disabled={!isEditMode} />
+        <FormField
+          name="username"
+          label="Username"
+          required
+          disabled={!isEditMode}
+        />
+        <FormField name="email" label="Email" disabled={!isEditMode} />
+        <FormField name="phone" label="Phone" disabled={!isEditMode} />
+        <Button
+          type="submit"
+          primary
+          label="Submit"
+          fill={false}
+          disabled={!isEditMode}
+        />
+      </Form>
     </Box>
   );
 }
