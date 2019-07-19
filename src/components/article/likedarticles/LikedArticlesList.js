@@ -5,8 +5,10 @@ import { Like } from "grommet-icons/es6";
 function LikedArticlesList() {
   return (
     <Box align="center">
-      <Box width="60%" align="stretch">
+      <Box width="60%" align="center">
         <DataTable
+          resizable={true}
+          sortable={true}
           alignSelf="center"
           columns={[
             {
