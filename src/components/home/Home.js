@@ -13,10 +13,10 @@ export default function Home() {
   }, []);
 
   return (
-    <Box direction="row" wrap={true} fill={false} justify="center">
+    <Box direction="row" wrap={true} justify="center">
       {!articles.loadingArticles && (
-        <InfiniteScroll step={50} items={articles}>
-          {(article, index) => (
+        articles.map(
+          (article, index) => (
             <Article
               key={article.id}
               title={article.title}
@@ -24,8 +24,7 @@ export default function Home() {
               image={article.image}
               articleIndex={index}
             />
-          )}
-        </InfiniteScroll>
+          ))
       )}
     </Box>
   );
