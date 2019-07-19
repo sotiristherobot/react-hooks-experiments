@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { API_REQUEST_USER } from "./constants/actionTypes";
 import Header from "./components/header/Header";
 import ArticleDetail from "./components/article/ArticleDetail";
+import LikedArticlesList from "./components/article/likedarticles/LikedArticlesList";
 
 // lazy load routes
 const Profile = lazy(() => import("./components/profile/Profile"));
@@ -26,6 +27,7 @@ function App() {
       <Route exact path="/article/:id" component={ArticleDetail} />
       <Suspense fallback={<div>Loading.....</div>}>
         <Route path="/profile" component={Profile} />
+        <Route path="/liked-articles" component={LikedArticlesList}/>
       </Suspense>
     </Router>
   );
