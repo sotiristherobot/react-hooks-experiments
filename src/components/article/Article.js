@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Box, Heading } from "grommet";
 import { Like } from "grommet-icons";
+import { useDispatch } from "react-redux";
+import {
+  ADD_LIKED_ARTICLE
+} from "../../constants/actionTypes";
 
 import styled from "styled-components";
 
@@ -11,8 +15,13 @@ function Article(props) {
     margin-top: auto;
     align-self: flex-start;
   `;
-  const [isLiked, setLiked] = useState(false);
-  const onLikeClick = () => (isLiked ? setLiked(false) : setLiked(true));
+  const [isLiked, setLiked] = useState(false),
+    dispatch = useDispatch();
+
+  const onLikeClick = () => {
+    isLiked ? setLiked(false) : setLiked(true);
+    dispatch({ type: ADD_LIKED_ARTICLE, payload: props });
+  };
 
   /**
    * Navigates to the article detail page on article click.

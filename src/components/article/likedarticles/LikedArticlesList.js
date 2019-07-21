@@ -1,8 +1,10 @@
 import React from "react";
 import { Box, DataTable } from "grommet";
 import { Like } from "grommet-icons/es6";
+import { useSelector } from "react-redux";
 
 function LikedArticlesList() {
+  const likedArticles = useSelector(state => (state.likedarticles && state.likedarticles.likedArticles));
   return (
     <Box pad={{ top: "medium" }}>
       <DataTable
@@ -10,7 +12,7 @@ function LikedArticlesList() {
         sortable={true}
         columns={[
           {
-            property: "id",
+            property: "articleIndex",
             header: "id",
             primary: true
           },
@@ -28,12 +30,7 @@ function LikedArticlesList() {
             )
           }
         ]}
-        data={[
-          { id: 0, title: "testr", percent: 20 },
-          { id: 1, title: "test1", percent: 30 },
-          { id: 2, title: "test2", percent: 40 },
-          { id: 3, title: "test3", percent: 80 }
-        ]}
+        data={likedArticles}
       />
     </Box>
   );
