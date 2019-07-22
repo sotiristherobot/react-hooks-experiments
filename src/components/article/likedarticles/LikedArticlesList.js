@@ -4,7 +4,8 @@ import { Like } from "grommet-icons/es6";
 import { useSelector } from "react-redux";
 
 function LikedArticlesList() {
-  const likedArticles = useSelector(state => (state.likedarticles && state.likedarticles.likedArticles));
+  const likedArticles = useSelector(state => state.likedarticles.likedArticles);
+
   return (
     <Box pad={{ top: "medium" }}>
       <DataTable
