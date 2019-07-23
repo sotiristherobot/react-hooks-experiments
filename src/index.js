@@ -15,7 +15,7 @@ sagaMiddleWare.run(watchAll);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Grommet>
+    <Grommet full={true}>
       <App />
     </Grommet>
   </Provider>,

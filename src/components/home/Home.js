@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Box, InfiniteScroll } from "grommet";
+import { Box } from "grommet";
 import { useDispatch, useSelector } from "react-redux";
 import { API_REQUEST_ARTICLES } from "../../constants/actionTypes";
 import Article from "../article/Article";
@@ -13,28 +13,17 @@ export default function Home() {
   }, []);
 
   return (
-    <Box>
-      <Box
-        width="60%"
-        direction="row"
-        alignSelf="center"
-        justify="center"
-        wrap={true}
-      >
-        {!articles.loadingArticles && (
-          <InfiniteScroll step={50} items={articles}>
-            {(article, index) => (
-              <Article
-                key={article.id}
-                title={article.title}
-                content={article.content}
-                image={article.image}
-                articleIndex={index}
-              />
-            )}
-          </InfiniteScroll>
-        )}
-      </Box>
+    <Box direction="row" wrap={true} justify="center">
+      {!articles.loadingArticles &&
+        articles.map((article, index) => (
+          <Article
+            key={article.id}
+            title={article.title}
+            content={article.content}
+            image={article.image}
+            articleIndex={index}
+          />
+        ))}
     </Box>
   );
 }

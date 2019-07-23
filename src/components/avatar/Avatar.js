@@ -18,6 +18,10 @@ export default function Avatar(props) {
       items={[
         { label: `Logged in as: ${props.fullName}` },
         {
+          label: "Liked articles",
+          onClick: () => history.push("/liked-articles")
+        },
+        {
           label: "Edit profile",
           onClick: () => history.push("/profile")
         },
