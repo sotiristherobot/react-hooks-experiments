@@ -40,6 +40,7 @@ function Article(props) {
     if (!isInLikedArticles) {
       dispatch({ type: ADD_LIKED_ARTICLE, payload: props });
       setLiked(true);
+      props.setShowNotification({ show: true, text: "Liked succesfully" });
     } else if (isInLikedArticles) {
       dispatch({ type: DELETE_LIKED_ARTICLE, payload: props });
       setLiked(false);
