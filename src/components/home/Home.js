@@ -3,11 +3,16 @@ import { Box } from "grommet";
 import { useDispatch, useSelector } from "react-redux";
 import { API_REQUEST_ARTICLES } from "../../constants/actionTypes";
 import Article from "../article/Article";
+import Notification from "../notification/Notification";
 
 export default function Home() {
   const articles = useSelector(state => state.articles.articles),
     dispatch = useDispatch(),
-    [isLoading, setIsLoading] = useState(true);
+    [isLoading, setIsLoading] = useState(true),
+    [showSuccessNotification, setShowSuccessNotification] = useState({
+      show: false,
+      text: null
+    });
 
   useEffect(() => {
     dispatch({ type: API_REQUEST_ARTICLES });
@@ -30,8 +35,16 @@ export default function Home() {
             content={article.content}
             image={article.image}
             articleIndex={index}
+            setShowNotification={setShowSuccessNotification}
           />
         ))
+      )}
+      {showSuccessNotification.show && (
+        <Notification
+          text={showSuccessNotification.text}
+          setShowNotification={setShowSuccessNotification}
+          timeLimit={3000}
+        />
       )}
     </Box>
   );
