@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Box, Heading } from "grommet";
 import { Like } from "grommet-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_LIKED_ARTICLE } from "../../constants/actionTypes";
+import {
+  ADD_LIKED_ARTICLE,
+  DELETE_LIKED_ARTICLE
+} from "../../constants/actionTypes";
 
 import styled from "styled-components";
 
@@ -14,6 +17,7 @@ function Article(props) {
     align-self: flex-start;
   `;
   const dispatch = useDispatch(),
+    [, setLiked] = useState(false),
     //   /*TODo this should be removed. With a proper backend, this should be coming from backend as we need to let
     //     backend know that user liked an article. Also for performance reasons, it would be a good idea to
     //     use Reselect react library to memoize the selector results as this way will create a new selector per article
@@ -31,8 +35,16 @@ function Article(props) {
         );
       return articles.length > 0;
     });
-  const onLikeClick = () =>
-    dispatch({ type: ADD_LIKED_ARTICLE, payload: props });
+
+  const onLikeClick = () => {
+    if (!isInLikedArticles) {
+      dispatch({ type: ADD_LIKED_ARTICLE, payload: props });
+      setLiked(true);
+    } else if (isInLikedArticles) {
+      dispatch({ type: DELETE_LIKED_ARTICLE, payload: props });
+      setLiked(false);
+    }
+  };
 
   /**
    * Navigates to the article detail page on article click.
@@ -45,7 +57,6 @@ function Article(props) {
   return (
     <Box
       align="center"
-      animation="fadeIn"
       border="all"
       elevation="large"
       margin="small"

@@ -16,7 +16,10 @@ export default function likedArticlesReducer(
       };
     case DELETE_LIKED_ARTICLE:
       return {
-        lastLikedArticle: {...state.lastLikedArticle},
+        likedArticles: state.likedArticles.filter(
+          v => v.articleIndex !== action.payload.articleIndex
+        ),
+        lastLikedArticle: { ...state.lastLikedArticle },
         lastDeletedArticle: action.payload
       };
     default:
