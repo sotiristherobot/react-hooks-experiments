@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Box, Heading } from "grommet";
 import { Like } from "grommet-icons";
@@ -9,6 +9,7 @@ import {
 } from "../../constants/actionTypes";
 
 import styled from "styled-components";
+import Notification from "../notification/Notification";
 
 function Article(props) {
   const StatusBar = styled.div`
@@ -18,6 +19,10 @@ function Article(props) {
   `;
   const dispatch = useDispatch(),
     [, setLiked] = useState(false),
+    [showSuccessNotification, setShowSuccessNotification] = useState({
+      show: false,
+      text: null
+    }),
     //   /*TODo this should be removed. With a proper backend, this should be coming from backend as we need to let
     //     backend know that user liked an article. Also for performance reasons, it would be a good idea to
     //     use Reselect react library to memoize the selector results as this way will create a new selector per article
@@ -40,7 +45,7 @@ function Article(props) {
     if (!isInLikedArticles) {
       dispatch({ type: ADD_LIKED_ARTICLE, payload: props });
       setLiked(true);
-      props.setShowNotification({ show: true, text: "Liked succesfully" });
+      setShowSuccessNotification({ show: true, text: "Liked succesfully" });
     } else if (isInLikedArticles) {
       dispatch({ type: DELETE_LIKED_ARTICLE, payload: props });
       setLiked(false);
@@ -56,43 +61,52 @@ function Article(props) {
   };
 
   return (
-    <Box
-      align="center"
-      border="all"
-      elevation="large"
-      margin="small"
-      width="medium"
-      overflow="hidden"
-    >
+    <Fragment>
       <Box
-        alignSelf="stretch"
-        justify="center"
-        background="#243959"
         align="center"
-        gap="small"
-        height="30px"
-        direction="row"
+        border="all"
+        elevation="large"
+        margin="small"
+        width="medium"
+        overflow="hidden"
       >
-        <Heading level={4} margin="0">
-          {props.articleIndex}
-        </Heading>
-        <Heading level={4} margin="0">
-          {props.title}
-        </Heading>
-      </Box>
-      <Box direction="column" pad="small" onClick={onArticleClick}>
-        <p>{props.content}</p>
-      </Box>
-      <StatusBar>
-        <Box direction="row" pad="small" gap="medium" justify="stretch">
-          <Like
-            size="medium"
-            color={isInLikedArticles ? "blue" : null}
-            onClick={onLikeClick}
-          />
+        <Box
+          alignSelf="stretch"
+          justify="center"
+          background="#243959"
+          align="center"
+          gap="small"
+          height="30px"
+          direction="row"
+        >
+          <Heading level={4} margin="0">
+            {props.articleIndex}
+          </Heading>
+          <Heading level={4} margin="0">
+            {props.title}
+          </Heading>
         </Box>
-      </StatusBar>
-    </Box>
+        <Box direction="column" pad="small" onClick={onArticleClick}>
+          <p>{props.content}</p>
+        </Box>
+        <StatusBar>
+          <Box direction="row" pad="small" gap="medium" justify="stretch">
+            <Like
+              size="medium"
+              color={isInLikedArticles ? "blue" : null}
+              onClick={onLikeClick}
+            />
+          </Box>
+        </StatusBar>
+      </Box>
+      {showSuccessNotification.show && (
+        <Notification
+          text={showSuccessNotification.text}
+          setShowNotification={setShowSuccessNotification}
+          timeLimit={3000}
+        />
+      )}
+    </Fragment>
   );
 }
 export default withRouter(Article);
