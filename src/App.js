@@ -25,7 +25,7 @@ function App() {
     <Router>
       <Box fill={true} direction="column" align="stretch">
         {!user.loadingUser && user.user ? <Header user={user.user} /> : null}
-        <Box height="90%" width="80%" alignSelf="center">
+        <Box height="95%" width="80%" alignSelf="center">
           <Route exact path="/" component={Home} />
           <Route exact path="/article/:id" component={ArticleDetail} />
           <Suspense fallback={<div>Loading.....</div>}>
