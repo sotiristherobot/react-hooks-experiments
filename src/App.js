@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect } from "react";
+import React, { Fragment, lazy, Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // components
@@ -24,15 +24,23 @@ function App() {
   return (
     <Router>
       <Box fill={true} direction="column" align="stretch">
-        {!user.loadingUser && user.user ? <Header user={user.user} /> : null}
-        <Box height="95%" width="80%" alignSelf="center">
-          <Route exact path="/" component={Home} />
-          <Route exact path="/article/:id" component={ArticleDetail} />
-          <Suspense fallback={<div>Loading.....</div>}>
-            <Route path="/profile" component={Profile} />
-            <Route path="/liked-articles" component={LikedArticlesList} />
-          </Suspense>
-        </Box>
+        {!user.loadingUser && user.user && (
+          <Fragment>
+            <Header user={user.user} />
+            <Box
+              width="80%"
+              alignSelf="center"
+              flex={{ grow: 0, shrink: 0 }}
+            >
+              <Route exact path="/" component={Home} />
+              <Route exact path="/article/:id" component={ArticleDetail} />
+              <Suspense fallback={<div>Loading.....</div>}>
+                <Route path="/profile" component={Profile} />
+                <Route path="/liked-articles" component={LikedArticlesList} />
+              </Suspense>
+            </Box>
+          </Fragment>
+        )}
       </Box>
     </Router>
   );
