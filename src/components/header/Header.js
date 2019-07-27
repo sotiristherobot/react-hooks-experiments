@@ -1,17 +1,18 @@
-import React from "react";
+import React, {useCallback} from "react";
 import { Box, Heading } from "grommet";
 import Avatar from "../avatar/Avatar";
-import useReactRouter from "use-react-router";
+import { withRouter } from 'react-router-dom';
 
 const HeaderStyle = {
   backgroundColor: "#243959"
 };
 
-export default function Header(props) {
-  console.log(props);
+const Header = function(props) {
   const { photo, name } = props.user,
-    { history } = useReactRouter(),
-    onHeaderClick = () => history.push("/");
+    // in javascript object comparison is happening by reference. we
+    // want to avoid creating the function on each render so we useCallback.
+    onHeaderClick = useCallback(() => props.history.push("/"));
+  console.log('rerendering');
 
   return (
     <Box align="center" background={HeaderStyle.backgroundColor}>
@@ -23,4 +24,5 @@ export default function Header(props) {
       </Box>
     </Box>
   );
-}
+};
+export default withRouter(Header);
