@@ -25,4 +25,9 @@ const Header = function(props) {
     </Box>
   );
 };
-export default withRouter(Header);
+/**
+ * There is no need to re-render <Header/> on every navigation action.
+ * React.memo with own comparison function. Not sure if this will cause any bugs, but for the moment
+ * it works.
+*/
+export default withRouter(React.memo(Header, () => true ));
