@@ -4,16 +4,16 @@
   "private": true,
   "dependencies": {
     "axios": "^0.19.0",
-    "grommet": "^2.7.1",
+    "grommet": "^2.7.4",
     "grommet-icons": "^4.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "redux": "^4.0.1",
-    "redux-saga": "^1.0.3",
-    "styled-components": "^5.0.0-beta.5",
+    "redux": "^4.0.4",
+    "redux-saga": "^1.0.5",
+    "styled-components": "^5.0.0-beta.6-ej4",
     "use-react-router": "^1.0.7"
   },
   "scripts": {
