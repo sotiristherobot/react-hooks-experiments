@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Image, Menu } from "grommet";
-import useReactRouter from "use-react-router";
+import { withRouter } from 'react-router-dom';
 
 const RoundedImage = styled(Image)`
   width: 50px;
@@ -9,8 +9,8 @@ const RoundedImage = styled(Image)`
   border-radius: 50%;
 `;
 
-export default function Avatar(props) {
-  const { history } = useReactRouter();
+const Avatar = function(props) {
+  const { history } = props;
 
   return (
     <Menu
@@ -29,4 +29,6 @@ export default function Avatar(props) {
       ]}
     />
   );
-}
+};
+
+export default withRouter(Avatar);
