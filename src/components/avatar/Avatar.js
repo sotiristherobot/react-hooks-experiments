@@ -17,7 +17,6 @@ const Avatar = function(props) {
     ),
     editProfileHandler = useCallback(() => history.push("/profile"), []),
     logoutHandler = useCallback(() => console.log("Logging out"), []);
-
   return (
     <Menu
       label={<RoundedImage src={props.url} alt={props.fullName} />}
@@ -37,4 +36,4 @@ const Avatar = function(props) {
   );
 };
 
-export default withRouter(Avatar);
+export default withRouter(React.memo(Avatar, () => true));
