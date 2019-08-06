@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { Image, Menu } from "grommet";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 const RoundedImage = styled(Image)`
   width: 50px;
@@ -10,7 +10,13 @@ const RoundedImage = styled(Image)`
 `;
 
 const Avatar = function(props) {
-  const { history } = props;
+  const { history } = props,
+    likedArticlesHandler = useCallback(
+      () => history.push("/liked-articles"),
+      []
+    ),
+    editProfileHandler = useCallback(() => history.push("/profile"), []),
+    logoutHandler = useCallback(() => console.log("Logging out"), []);
 
   return (
     <Menu
@@ -19,13 +25,13 @@ const Avatar = function(props) {
         { label: `Logged in as: ${props.fullName}` },
         {
           label: "Liked articles",
-          onClick: () => history.push("/liked-articles")
+          onClick: likedArticlesHandler
         },
         {
           label: "Edit profile",
-          onClick: () => history.push("/profile")
+          onClick: editProfileHandler
         },
-        { label: "Logout", onClick: () => {} }
+        { label: "Logout", onClick: logoutHandler }
       ]}
     />
   );
