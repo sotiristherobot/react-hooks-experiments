@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import styled from "styled-components";
 import { Image, Menu } from "grommet";
 import { withRouter } from "react-router-dom";
@@ -9,31 +9,32 @@ const RoundedImage = styled(Image)`
   border-radius: 50%;
 `;
 
-const Avatar = function(props) {
-  const { history } = props,
-    likedArticlesHandler = useCallback(
-      () => history.push("/liked-articles"),
-      []
+const Avatar = function({ history, url, fullName }) {
+  /**
+    Based on https://stackoverflow.com/questions/57870754/difference-between-usecallback-and-useref-hooks-when-useref-is-used-as-an-instan
+   */
+  const onMenuItemClick = useCallback(
+      urlToNavigate => history.push(urlToNavigate),
+      [history]
     ),
-    editProfileHandler = useCallback(() => history.push("/profile"), []),
-    logoutHandler = useCallback(() => console.log("Logging out"), []);
+    onMenuItemClickRef = useRef(onMenuItemClick);
+
   return (
     <Menu
-      label={<RoundedImage src={props.url} alt={props.fullName} />}
+      label={<RoundedImage src={url} alt={fullName} />}
       items={[
-        { label: `Logged in as: ${props.fullName}` },
+        { label: `Logged in as: ${fullName}` },
         {
           label: "Liked articles",
-          onClick: likedArticlesHandler
+          onClick: () => onMenuItemClickRef.current("/liked-articles")
         },
         {
           label: "Edit profile",
-          onClick: editProfileHandler
+          onClick: () => onMenuItemClickRef.current("/profile")
         },
-        { label: "Logout", onClick: logoutHandler }
+        { label: "Logout", onClick: () => console.log("Logging out") }
       ]}
     />
   );
 };
-
 export default withRouter(React.memo(Avatar, () => true));
