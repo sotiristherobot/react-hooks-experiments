@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Box, Form, FormField, Button } from "grommet";
+import { Box, Button } from "grommet";
 import { Edit, Save } from "grommet-icons";
+import ProfileForm from "./form/ProfileForm";
 
 export default function Profile() {
   const [isEditMode, setIsEditMode] = useState(false),
@@ -29,24 +30,7 @@ export default function Profile() {
           onClick={editButtonClicked}
         />
       </Box>
-      <Form>
-        <FormField name="name" label="Name" required disabled={!isEditMode} />
-        <FormField
-          name="username"
-          label="Username"
-          required
-          disabled={!isEditMode}
-        />
-        <FormField name="email" label="Email" disabled={!isEditMode} />
-        <FormField name="phone" label="Phone" disabled={!isEditMode} />
-        <Button
-          type="submit"
-          primary
-          label="Submit"
-          fill={false}
-          disabled={!isEditMode}
-        />
-      </Form>
+        <ProfileForm isEditMode={isEditMode}/>
     </Box>
   );
 }
