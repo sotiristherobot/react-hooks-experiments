@@ -3,8 +3,8 @@ import { Button, Form, FormField } from "grommet/es6";
 
 export default function ProfileForm({ isEditMode }) {
   return (
-    <Form disabled={!isEditMode}>
-      <FormField name="name" label="Name" required />
+    <Form>
+      <FormField name="name" label="Name" required disabled={!isEditMode} />
       <FormField
         name="username"
         label="Username"
