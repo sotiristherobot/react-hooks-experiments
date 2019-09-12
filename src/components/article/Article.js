@@ -11,6 +11,34 @@ import {
 import styled from "styled-components";
 import Notification from "../notification/Notification";
 
+/**
+ * Renders articles header bar with the index and the title
+ * @param {string} articleIndex
+ * @param {string} title
+ * @returns {*}
+ * @constructor
+ */
+function ArticleHeading({ articleIndex, title }) {
+  return (
+    <Box
+      alignSelf="stretch"
+      justify="center"
+      background="#243959"
+      align="center"
+      gap="small"
+      height="30px"
+      direction="row"
+    >
+      <Heading level={4} margin="0">
+        {articleIndex}
+      </Heading>
+      <Heading level={4} margin="0">
+        {title}
+      </Heading>
+    </Box>
+  );
+}
+
 function Article(props) {
   const StatusBar = styled.div`
     width: 100%;
@@ -70,22 +98,7 @@ function Article(props) {
         width="medium"
         overflow="hidden"
       >
-        <Box
-          alignSelf="stretch"
-          justify="center"
-          background="#243959"
-          align="center"
-          gap="small"
-          height="30px"
-          direction="row"
-        >
-          <Heading level={4} margin="0">
-            {props.articleIndex}
-          </Heading>
-          <Heading level={4} margin="0">
-            {props.title}
-          </Heading>
-        </Box>
+        <ArticleHeading articleIndex={props.articleIndex} title={props.title} />
         <Box direction="column" pad="small" onClick={onArticleClick}>
           <p>{props.content}</p>
         </Box>
