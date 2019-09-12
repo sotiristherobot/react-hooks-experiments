@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useCallback, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Box, Heading } from "grommet";
 import { Like } from "grommet-icons";
@@ -39,14 +39,34 @@ const ArticleHeading = React.memo(({ articleIndex, title }) => {
   );
 });
 
-function Article(props) {
-  const StatusBar = styled.div`
+/**
+ * Renders articles statusbar. It's wrapped with React.memo to avoid unecessary re-rerenders.
+ * Now this component rererenders only when there is a change in it's props.
+ * Here is an excellent article describing this:
+ * https://dmitripavlutin.com/use-react-memo-wisely/
+ */
+const StatusBar = React.memo(({ isInLikedArticles, onLikeClick }) => {
+  const StatusBarWrapper = styled.div`
     width: 100%;
     margin-top: auto;
     align-self: flex-start;
   `;
+  return (
+    <StatusBarWrapper>
+      <Box direction="row" pad="small" gap="medium" justify="stretch">
+        <Like
+          size="medium"
+          color={isInLikedArticles ? "blue" : null}
+          onClick={onLikeClick}
+        />
+      </Box>
+    </StatusBarWrapper>
+  );
+});
+
+function Article(props) {
   const dispatch = useDispatch(),
-    [, setLiked] = useState(false),
+    [liked, setLiked] = useState(false),
     [showSuccessNotification, setShowSuccessNotification] = useState({
       show: false,
       text: null
@@ -69,7 +89,14 @@ function Article(props) {
       return articles.length > 0;
     });
 
-  const onLikeClick = () => {
+  /**
+   * Click handler for when the like button is clicked on the status bar.
+   * Wrapped in useCallback to memoize the function to depend only on when the liked state variable is changing.
+   * This way the <StatusBar/> is not unecessarily re-render because of referential equality of objects in JavaScript.
+   * Otherwise <StatusBar/> was rerendering when the notification message was disappearing.
+   * @type {Function}
+   */
+  const onLikeClick = useCallback(() => {
     if (!isInLikedArticles) {
       dispatch({ type: ADD_LIKED_ARTICLE, payload: props });
       setLiked(true);
@@ -78,7 +105,7 @@ function Article(props) {
       dispatch({ type: DELETE_LIKED_ARTICLE, payload: props });
       setLiked(false);
     }
-  };
+  }, [liked]);
 
   /**
    * Navigates to the article detail page on article click.
@@ -102,15 +129,10 @@ function Article(props) {
         <Box direction="column" pad="small" onClick={onArticleClick}>
           <p>{props.content}</p>
         </Box>
-        <StatusBar>
-          <Box direction="row" pad="small" gap="medium" justify="stretch">
-            <Like
-              size="medium"
-              color={isInLikedArticles ? "blue" : null}
-              onClick={onLikeClick}
-            />
-          </Box>
-        </StatusBar>
+        <StatusBar
+          isInLikedArticles={isInLikedArticles}
+          onLikeClick={onLikeClick}
+        />
       </Box>
       {showSuccessNotification.show && (
         <Notification
