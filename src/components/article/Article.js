@@ -18,7 +18,7 @@ import Notification from "../notification/Notification";
  * @returns {*}
  * @constructor
  */
-function ArticleHeading({ articleIndex, title }) {
+const ArticleHeading = React.memo(({ articleIndex, title }) => {
   return (
     <Box
       alignSelf="stretch"
@@ -37,7 +37,7 @@ function ArticleHeading({ articleIndex, title }) {
       </Heading>
     </Box>
   );
-}
+});
 
 function Article(props) {
   const StatusBar = styled.div`
