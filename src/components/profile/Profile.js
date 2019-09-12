@@ -5,9 +5,8 @@ import ProfileForm from "./form/ProfileForm";
 
 export default function Profile() {
   const [isEditMode, setIsEditMode] = useState(false),
-    editButtonClicked = function() {
+    editButtonClicked = () =>
       isEditMode ? setIsEditMode(false) : setIsEditMode(true);
-    };
 
   return (
     <Box width="80%" pad={{ top: "medium" }} alignSelf="center">
