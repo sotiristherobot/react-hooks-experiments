@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React  from "react";
 import { Box, Heading } from "grommet";
 import Avatar from "../avatar/Avatar";
 import { withRouter } from 'react-router-dom';
@@ -9,11 +9,8 @@ const HeaderStyle = {
 
 const Header = function(props) {
   const { photo, name } = props.user,
-    // in javascript object comparison is happening by reference. we
-    // want to avoid creating the function on each render so we useCallback.
-    onHeaderClick = useCallback(() => props.history.push("/"));
+    onHeaderClick = () => props.history.push("/");
   console.log('rerendering');
-
   return (
     <Box align="center" background={HeaderStyle.backgroundColor} flex={{grow: 0, shrink: 0}}>
       <Box width="80%" direction="row" justify="between" align="center">
@@ -27,7 +24,7 @@ const Header = function(props) {
 };
 /**
  * There is no need to re-render <Header/> on every navigation action.
- * React.memo with own comparison function. Not sure if this will cause any bugs, but for the moment
- * it works.
+ * <Header/> is now pure component using React.memo with it's own comparison function that always returns true on props comparisons,
+ * to avoid re-renders based on the history, from withRouter HOC.
 */
 export default withRouter(React.memo(Header, () => true ));
