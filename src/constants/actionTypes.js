@@ -1,3 +1,7 @@
+// User is authed
+export const API_AUTH_USER = "API_AUTH_USER";
+export const API_IS_USER_AUTHED = "API_IS_USER_AUTHED";
+
 // User related
 export const API_REQUEST_USER = "API_REQUEST_USER";
 export const API_REQUEST_USER_SUCCESS = "API_REQUEST_USER_SUCCESS";
