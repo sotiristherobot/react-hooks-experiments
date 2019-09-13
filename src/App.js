@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import ProtectedRoute from "./utils/ProtectedRoute";
 
 // components
+import Login from "./components/login/Login";
 import Home from "./components/home/Home";
 import { useDispatch, useSelector } from "react-redux";
 import { API_REQUEST_USER } from "./constants/actionTypes";
@@ -13,6 +14,9 @@ import { Box } from "grommet/es6";
 
 // lazy load routes
 const Profile = lazy(() => import("./components/profile/Profile"));
+
+//ToDo Login logic should be implemented here.
+const isAuthed = () => false;
 
 function App() {
   const user = useSelector(state => state.user),
@@ -27,9 +31,15 @@ function App() {
       <Box fill={true} direction="column" align="stretch">
         {!user.loadingUser && user.user && (
           <Fragment>
-            <Header user={user.user} />
+            <Header isAuthed={isAuthed()} user={user.user} />
+            <Route exact path="/login" component={Login} />
             <Box width="80%" alignSelf="center" flex={{ grow: 0, shrink: 0 }}>
-              <ProtectedRoute exact path="/" component={Home} />
+              <ProtectedRoute
+                isAuthed={isAuthed()}
+                exact
+                path="/"
+                component={Home}
+              />
               <Route exact path="/article/:id" component={ArticleDetail} />
               <Suspense fallback={<div>Loading.....</div>}>
                 <Route path="/profile" component={Profile} />
