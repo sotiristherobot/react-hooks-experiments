@@ -1,5 +1,6 @@
 import React, { Fragment, lazy, Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 // components
 import Home from "./components/home/Home";
@@ -27,12 +28,8 @@ function App() {
         {!user.loadingUser && user.user && (
           <Fragment>
             <Header user={user.user} />
-            <Box
-              width="80%"
-              alignSelf="center"
-              flex={{ grow: 0, shrink: 0 }}
-            >
-              <Route exact path="/" component={Home} />
+            <Box width="80%" alignSelf="center" flex={{ grow: 0, shrink: 0 }}>
+              <ProtectedRoute exact path="/" component={Home} />
               <Route exact path="/article/:id" component={ArticleDetail} />
               <Suspense fallback={<div>Loading.....</div>}>
                 <Route path="/profile" component={Profile} />
