@@ -1,5 +1,4 @@
 import React from "react";
 
-export default function Login() {
-    return <p>This is the login screen</p>
-}
+const Login = ({isAuthed}) => !isAuthed && <p>This is the login screen</p>;
+export default React.memo(Login);

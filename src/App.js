@@ -1,6 +1,5 @@
 import React, { Fragment, lazy, Suspense, useEffect } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import ProtectedRoute from "./utils/ProtectedRoute";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 // components
 import Login from "./components/login/Login";
@@ -42,8 +41,8 @@ function App() {
   return (
     <Router>
       <Box fill={true} direction="column" align="stretch">
-        <Route exact path="/login" component={Login} />
-        {!user.loadingUser && user.user && (
+        <Route exact path="/login" render={() => <Login isAuthed={userIsAuthed}/>}/>
+        {userIsAuthed? !user.loadingUser && user.user && (
           <Fragment>
             <Header isAuthed={userIsAuthed} user={user.user} />
             <Box width="80%" alignSelf="center" flex={{ grow: 0, shrink: 0 }}>
@@ -55,7 +54,7 @@ function App() {
               </Suspense>
             </Box>
           </Fragment>
-        )}
+        ): <Redirect to={{pathname: "/login"}}/>}
       </Box>
     </Router>
   );
