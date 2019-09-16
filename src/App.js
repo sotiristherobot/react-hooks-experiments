@@ -34,30 +34,37 @@ function App() {
       /* the else statement exists here only for demonstration purposes. If the user is not authorized yet, it
       forces authorization*/
     } else {
-      dispatch({type: API_AUTH_USER});
+      dispatch({ type: API_AUTH_USER });
     }
   }, [userIsAuthed]);
 
   return (
     <Router>
       <Box fill={true} direction="column" align="stretch">
-        <Box width="40%" pad={{ top: "medium" }} alignSelf="center">
-          <Route exact path="/login" render={() => <Login isAuthed={userIsAuthed}/>}/>
-        </Box>
-        {userIsAuthed? !user.loadingUser && user.user && (
-          <Fragment>
-            <Header isAuthed={userIsAuthed} user={user.user} />
-            <Box width="80%" alignSelf="center" flex={{ grow: 0, shrink: 0 }}>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/article/:id" component={ArticleDetail} />
-              <Suspense fallback={<div>Loading.....</div>}>
-                <Route path="/profile" component={Profile} />
-                <Route path="/liked-articles" component={LikedArticlesList} />
-              </Suspense>
-            </Box>
-            <Redirect to={{pathname: "/"}}/>}
-          </Fragment>
-        ): <Redirect to={{pathname: "/login"}}/>}
+        <Route
+          exact
+          path="/login"
+          render={() => <Login isAuthed={userIsAuthed} />}
+        />
+        {userIsAuthed ? (
+          !user.loadingUser &&
+          user.user && (
+            <Fragment>
+              <Header isAuthed={userIsAuthed} user={user.user} />
+              <Box width="80%" alignSelf="center" flex={{ grow: 0, shrink: 0 }}>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/article/:id" component={ArticleDetail} />
+                <Suspense fallback={<div>Loading.....</div>}>
+                  <Route path="/profile" component={Profile} />
+                  <Route path="/liked-articles" component={LikedArticlesList} />
+                </Suspense>
+              </Box>
+              <Redirect to={{ pathname: "/" }} />}
+            </Fragment>
+          )
+        ) : (
+          <Redirect to={{ pathname: "/login" }} />
+        )}
       </Box>
     </Router>
   );
