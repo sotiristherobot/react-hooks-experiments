@@ -41,7 +41,9 @@ function App() {
   return (
     <Router>
       <Box fill={true} direction="column" align="stretch">
-        <Route exact path="/login" render={() => <Login isAuthed={userIsAuthed}/>}/>
+        <Box width="40%" pad={{ top: "medium" }} alignSelf="center">
+          <Route exact path="/login" render={() => <Login isAuthed={userIsAuthed}/>}/>
+        </Box>
         {userIsAuthed? !user.loadingUser && user.user && (
           <Fragment>
             <Header isAuthed={userIsAuthed} user={user.user} />
