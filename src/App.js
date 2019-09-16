@@ -53,6 +53,7 @@ function App() {
                 <Route path="/liked-articles" component={LikedArticlesList} />
               </Suspense>
             </Box>
+            <Redirect to={{pathname: "/"}}/>}
           </Fragment>
         ): <Redirect to={{pathname: "/login"}}/>}
       </Box>
